@@ -1,5 +1,5 @@
-use std::net::TcpListener;
 use sqlx::{Connection, PgConnection, Row};
+use std::net::TcpListener;
 use zero2prod::configuration::get_configuration;
 
 #[tokio::test]
@@ -63,7 +63,8 @@ async fn subscribe_returns_a_400_when_data_is_missing() {
             .post(&format!("{}/subscribe", &app_address))
             .header("Content-Type", "application/x-www-form-urlencoded")
             .body(invalid_body)
-            .send().await
+            .send()
+            .await
             .expect("Failed to execute request");
 
         assert_eq!(
