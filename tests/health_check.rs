@@ -34,13 +34,15 @@ async fn spawn_app() -> TestApp {
     let listener = TcpListener::bind("127.0.0.1:0").expect("Failed to bind to random port");
     let port = listener.local_addr().unwrap().port();
     let address = format!("http://127.0.0.1:{}", port);
+    let randomized_db_name = Uuid::new_v4().to_string();
 
     let mut configuration = get_configuration().expect("Failed to read configuration file");
-    configuration.database.database_name = Uuid::new_v4().to_string();
+    configuration.database.database_name = randomized_db_name;
+
     let connection_pool = configure_test_database(&configuration.database).await;
 
-    let server =
-        zero2prod::startup::run(listener, connection_pool.clone()).expect("Failed to bind address");
+    let server = zero2prod::startup::run(listener, connection_pool.clone())
+        .expect("Failed to bind address");
     let _ = tokio::spawn(server);
 
     TestApp {
