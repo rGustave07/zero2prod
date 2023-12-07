@@ -10,7 +10,7 @@ async fn main() -> Result<(), std::io::Error> {
     telemetry::init_subscriber(subscriber);
     // <============= DB / APP configuration =============>
     let config = configuration::get_configuration().expect("Failed to retrieve configurations");
-    let connection_pool = PgPool::connect(&config.database.connection_string().expose_secret())
+    let connection_pool = PgPool::connect(config.database.connection_string().expose_secret())
         .await
         .expect("Failed to connect to Postgres.");
     let address = format!("127.0.0.1:{}", config.application_port);
