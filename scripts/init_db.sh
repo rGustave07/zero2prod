@@ -29,7 +29,9 @@ then
       -e POSTGRES_PASSWORD=${DB_PASSWORD} \
       -e POSTGRES_DB=${DB_NAME} \
       -p "${DB_PORT}":5432 \
-      -d postgres \
+      -d \
+      --name "dockerPostgres" \
+      --net "z2pTestNetwork" \
       postgres -N 1000
 fi
 
