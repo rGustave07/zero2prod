@@ -1,7 +1,8 @@
 application:
   port: 8000
 database:
-  host: "dockerPostgres"
+#  use dockerPostgres for live
+  host: "127.0.0.1"
   port: 5555
   username: "postgres"
   password: "password"

@@ -1,7 +1,6 @@
 use secrecy::ExposeSecret;
-use sqlx::PgPool;
-use std::net::TcpListener;
 use sqlx::postgres::PgPoolOptions;
+use std::net::TcpListener;
 use zero2prod::{configuration, startup, telemetry};
 
 #[tokio::main]
