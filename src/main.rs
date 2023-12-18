@@ -10,10 +10,9 @@ async fn main() -> Result<(), std::io::Error> {
     telemetry::init_subscriber(subscriber);
     // <============= DB / APP configuration =============>
     let config = configuration::get_configuration().expect("Failed to retrieve configuration");
-    // let connection_pool = PgPool::connect_lazy(config.database.connection_string().expose_secret())
     let connection_pool = PgPoolOptions::new()
         .acquire_timeout(std::time::Duration::from_secs(2))
-        .connect_lazy(&config.database.connection_string().expose_secret())
+        .connect_lazy(config.database.connection_string().expose_secret())
         .expect("Failed to create Postgres connection pool.");
     let address = format!("{}:{}", config.application.host, config.application.port);
     println!("{}", address.as_str());
