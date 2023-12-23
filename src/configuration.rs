@@ -1,7 +1,7 @@
 use secrecy::{ExposeSecret, Secret};
 use serde_aux::field_attributes::deserialize_number_from_string;
+use sqlx::postgres::{PgConnectOptions, PgSslMode};
 use sqlx::ConnectOptions;
-use sqlx::postgres::{ PgConnectOptions, PgSslMode };
 
 #[derive(serde::Deserialize)]
 pub struct ApplicationSettings {
@@ -102,7 +102,7 @@ pub fn get_configuration() -> Result<Settings, config::ConfigError> {
         .add_source(
             config::Environment::with_prefix("APP")
                 .prefix_separator("_")
-                .separator("__")
+                .separator("__"),
         )
         .build()?;
     // Try to convert the configuration values it read into // our Settings type settings.try_deserialize::<Settings>()
