@@ -42,7 +42,7 @@ impl DatabaseSettings {
             .host(&self.host)
             .port(self.port)
             .username(&self.username)
-            .password(&self.password.expose_secret())
+            .password(self.password.expose_secret())
             .ssl_mode(ssl_mode)
     }
 }
