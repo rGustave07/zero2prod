@@ -24,6 +24,9 @@ features = [
 ]
 
 [dependencies]
+validator = "0.16"
+claims = "0.7"
+unicode-segmentation = "1"
 serde-aux = "4"
 tracing-actix-web = "0.7"
 secrecy = { version = "0.8", features = ["serde"] }
@@ -40,4 +43,7 @@ tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
 serde = { version = "1", features = ["derive"] }
 
 [dev-dependencies]
+quickcheck = "0.9.2"
+quickcheck_macros = "0.9.1"
+fake = "~2.3"
 reqwest = "0.11.0"
