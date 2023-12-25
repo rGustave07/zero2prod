@@ -14,14 +14,11 @@ impl SubscriberName {
         // `true` specifies that we want to use the extended grapheme definition set,
         // the recommended one.
         let use_extended_definition_set = true;
-        let is_too_long = s
-            .graphemes(use_extended_definition_set)
-            .count() > 256;
+        let is_too_long = s.graphemes(use_extended_definition_set).count() > 256;
 
         let forbidden_characters = ['/', '(', ')', '"', '<', '>', '\\', '{', '}'];
-        let input_contains_forbidden_characters = s
-            .chars()
-            .any(|g| forbidden_characters.contains(&g));
+        let input_contains_forbidden_characters =
+            s.chars().any(|g| forbidden_characters.contains(&g));
 
         if is_empty_or_whitespace || is_too_long || input_contains_forbidden_characters {
             Err(format!("{} is not a valid subscriber name.", s))
